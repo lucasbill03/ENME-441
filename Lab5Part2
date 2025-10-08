@@ -1,0 +1,42 @@
+import RPi.GPIO as GPIO
+import math
+import time
+
+GPIO.setmode(GPIO.BCM)
+
+# output(s)
+GPIO.setup(17, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(27, GPIO.OUT, initial=GPIO.LOW)
+
+# variables
+f = 0.2
+phi = math.pi/11
+BF = 500
+t_initial = time.time()
+pwm = GPIO.PWM(17, BF)
+pwm2 = GPIO.PWM(27, BF)
+pwm.start(0)
+pwm2.start(0)
+
+# try-catch statement
+try:
+	while True:
+		t_actual = time.time() - t_initial
+
+		# Pin 1 duty cycle changing
+		B = (math.sin(2 * math.pi * f * t_actual)**2)
+		duty_cycle = B * 100.0
+
+		# Pin 2 duty cycle changing
+		b = (math.sin(2 * math.pi * f * t_actual - phi)**2)
+		duty_cycle2 = b * 100.0
+
+		pwm.ChangeDutyCycle(duty_cycle)
+		pwm2.ChangeDutyCycle(duty_cycle2)
+
+except KeyboardInterrupt:
+	pass
+finally:
+	pwm.stop()
+	pwm2.stop()
+	GPIO.cleanup()
