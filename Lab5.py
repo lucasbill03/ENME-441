@@ -11,7 +11,7 @@ GPIO.setup(17, GPIO.OUT, initial=GPIO.LOW)
 f = 0.2
 BF = 500
 t_initial = time.time()
-pwm = GPI.PWM(17, BF)
+pwm = GPIO.PWM(17, BF)
 pwm.start(0)
 
 try:
@@ -26,3 +26,4 @@ except KeyboardInterrupt:
 finally:
 	pwm.stop()
 	GPIO.cleanup()
+
