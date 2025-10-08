@@ -17,8 +17,8 @@ pwm.start(0)
 try:
 	while True:
 		t_actual = time.time() - t_initial
-		B = (math.sin(2 * math.pi * f * t_actual))
-		duty_cycle = B * 100
+		B = (math.sin(2 * math.pi * f * t_actual)**2)
+		duty_cycle = B * 100.0
 		pwm.ChangeDutyCycle(duty_cycle)
 
 except KeyboardInterrupt:
@@ -26,5 +26,6 @@ except KeyboardInterrupt:
 finally:
 	pwm.stop()
 	GPIO.cleanup()
+
 
 
