@@ -19,7 +19,7 @@ try:
 	while True:
 		if GPIO.input(17):
 			bug.start()
-        else:
+		else:
             bug.stop()
 
         if GPIO.input(27):
@@ -42,3 +42,4 @@ finally:
 	bug.stop()
 
 	GPIO.cleanup()
+
