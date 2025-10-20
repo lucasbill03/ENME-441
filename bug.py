@@ -17,7 +17,7 @@ prev_s2 = False
 
 try:
 	while True:
-	if GPIO.input(17):
+		if GPIO.input(17):
 			bug.start()
         else:
             bug.stop()
@@ -40,4 +40,5 @@ except KeyboardInterrupt:
 	
 finally:
 	bug.stop()
+
 	GPIO.cleanup()
