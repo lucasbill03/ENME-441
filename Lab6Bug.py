@@ -17,14 +17,11 @@ class Bug:
         self.__running = True
         try:
             while self.__running:
-                # light current LED
                 pattern = 1 << self.x
                 self.__shifter.shiftByte(pattern)
 
-                # move randomly
                 self.x += random.choice([-1, 1])
 
-                # wrap or clamp
                 if self.isWrapOn:
                     self.x %= 8
                 else:
@@ -41,3 +38,4 @@ class Bug:
         self.__running = False
         self.__shifter.shiftByte(0)
         GPIO.cleanup()
+
