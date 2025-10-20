@@ -14,27 +14,34 @@ class Bug:
         self.__shifter = Shifter(serialPin=23, clockPin=25, latchPin=24)
 
     def start(self):
+        self.__running = True
+        try:
+            while self.__running:
+                # light current LED
+                pattern = 1 << self.x
+                self.__shifter.shiftByte(pattern)
 
-    	self.__running = True
-		
-		while True:
-			self.x += random.choice([-1, 1])
-			
-		if self.isWrapOn:
-			self.x %= 8
-		else:
-			if self.x < 0:
-				self.x = 0
-				
-			if self.x > 7:
-				self.x = 7
-			
-		time.sleep(self.timestep)
+                # move randomly
+                self.x += random.choice([-1, 1])
+
+                # wrap or clamp
+                if self.isWrapOn:
+                    self.x %= 8
+                else:
+                    if self.x < 0:
+                        self.x = 0
+                    if self.x > 7:
+                        self.x = 7
+
+                time.sleep(self.timestep)
+        except KeyboardInterrupt:
+            self.stop()
 
     def stop(self):
         self.__running = False
         self.__shifter.shiftByte(0)
         GPIO.cleanup()
+
 
 
 
