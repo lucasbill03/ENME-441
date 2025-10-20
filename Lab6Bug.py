@@ -41,10 +41,3 @@ class Bug:
         self.__running = False
         self.__shifter.shiftByte(0)
         GPIO.cleanup()
-
-
-
-
-
-
-
