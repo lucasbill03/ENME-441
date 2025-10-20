@@ -7,6 +7,7 @@ class Shifter:
 	## Initializer for the Shifter class, field values set to the
 	## serialPin, clockPin, and latchPin values
     def __init__(self, serialPin, clockPin, latchPin):
+    	
         self.serialPin = serialPin
         self.clockPin = clockPin
         self.latchPin = latchPin
@@ -22,7 +23,9 @@ class Shifter:
         GPIO.output(pin, 0)
 
     def shiftByte(self, byte):
+
         for i in range(8):
             GPIO.output(self.serialPin, (byte >> i) & 1)
             self.__ping(self.clockPin)
+
         self.__ping(self.latchPin)
