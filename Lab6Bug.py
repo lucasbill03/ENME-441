@@ -36,3 +36,4 @@ class Bug:
         self.__shifter.shiftByte(0)
         GPIO.cleanup()
 
+
