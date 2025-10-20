@@ -17,7 +17,7 @@ class Bug:
 
     	self.__running = True
 		
-		while self._running:
+		while True:
 			self.x += random.choice([-1, 1])
 			
 		if self.isWrapOn:
@@ -35,6 +35,7 @@ class Bug:
         self.__running = False
         self.__shifter.shiftByte(0)
         GPIO.cleanup()
+
 
 
 
